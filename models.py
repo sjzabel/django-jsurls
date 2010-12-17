@@ -13,8 +13,6 @@ class DJJSUrl(object):
         self.url_s = url_s
         self.url_template = self.get_url_template(url_s)
         self.var_template = ",".join(self.var_li) 
-        print self.key
-        print self.url_template
 
     def get_url_template(self,s):
         template = "{{{{ {0} }}}}"
