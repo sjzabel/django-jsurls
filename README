@@ -1,3 +1,9 @@
+Usage (in js code)
+
+>>> dj_jsurls.foo_named_url_path(13);
+"/foo_named_urls/13/
+
+
 This borrows from the ideas used in toretore/javescript_routes. I used javascript_routes 
 extensively while I was coding in ROR. Now that I'm coding Django again, I decided to port it over.
 
