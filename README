@@ -1,0 +1,9 @@
+This borrows from the ideas used in toretore/javescript_routes. I used javascript_routes 
+extensively while I was coding in ROR. Now that I'm coding Django again, I decided to port it over.
+
+Requires jquery.js and underscore.js (however, it would be pretty easy to hack into any js framework)
+
+It is packaged as a plugable app; put it on your python path and add it to your INSTALLED_APPS
+
+Cheers,
+Stephen
