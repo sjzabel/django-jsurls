@@ -1,15 +1,15 @@
 // assumes jQuery.js and underscore.js
 
-var dj_jsurls = {};
+var jsurls = {};
 
 {% for url in named_urls %}
 
-dj_jsurls.{{ url.key }}_template= _.template("/{{ url.url_template }}");
-dj_jsurls.{{ url.key }}_path = function({{ url.var_template }}){
+jsurls.{{ url.key }}_template= _.template("/{{ url.url_template }}");
+jsurls.{{ url.key }}_path = function({{ url.var_template }}){
     var var_d = { {% for v in url.var_li %}
         {{ v }}:{{ v }}{% if not forloop.last %},{% endif %}{% endfor %}
     };
 
-    return dj_jsurls.{{ url.key }}_template(var_d);
+    return jsurls.{{ url.key }}_template(var_d);
 }
 {% endfor %}
