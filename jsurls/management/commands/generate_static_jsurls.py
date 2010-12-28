@@ -24,8 +24,8 @@ class Command(BaseCommand):
 
         if 'path' in options and options['path']!="":
             path = options['path']
-        elif hasattr(settings,'DJ_JSURLS_PATH'):
-            path = settings.DJ_JSURLS_PATH
+        elif hasattr(settings,'JSURLS_PATH'):
+            path = settings.JSURLS_PATH
         else:
             path = os.path.join(settings.STATIC_ROOT,'js')
 

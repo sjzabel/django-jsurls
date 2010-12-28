@@ -12,7 +12,7 @@ class RenderStaticPrefixNode(template.Node):
             return '/static_js_urls/'
         else:
             if 'STATIC_PREFIX' in context:
-                return context["STATIC_PREFIX"]
+                return "/%s" % context["STATIC_PREFIX"]
             else:
                 return ''
 
