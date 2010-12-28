@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.urlresolvers import get_resolver
 
-class DJJSUrl(object):
+class JSUrl(object):
     def __init__(self,key,url_s,var_li):
         '''
         Right now this is kinda hacky... 
@@ -22,4 +22,4 @@ class DJJSUrl(object):
 def get_named_urls():
     resolver = get_resolver(settings.ROOT_URLCONF)
     rev_d = resolver._get_reverse_dict()
-    return [DJJSUrl(k,*v[0][0]) for k,v in rev_d.items() if k.__class__==str]
+    return [JSUrl(k,*v[0][0]) for k,v in rev_d.items() if k.__class__==str]

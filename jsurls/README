@@ -1,8 +1,16 @@
-Usage (in js code)
+(in ./urls.py)
+from jsurls.urls import jsurls_urlpatterns
+urlpatterns += jsurls_urlpatterns()
 
->>> dj_jsurls.foo_named_url_path(13);
+(in base template)
+<script type="text/javascript" src="{% get_jsurls_static_prefix %}js/jsurls.js"></script>
+
+(in js code)
+>>> jsurls.foo_named_url_path(13);
 "/foo_named_urls/13/
 
+to generate a static file for production (the route will only work in debug)
+./manage.py generate_static_jsurls
 
 This borrows from the ideas used in toretore/javescript_routes. I used javascript_routes 
 extensively while I was coding in ROR. Now that I'm coding Django again, I decided to port it over.
