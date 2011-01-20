@@ -19,7 +19,62 @@ class JSUrl(object):
         d =  dict([(var,template.format(var)) for var in self.var_li])
         return s % d
 
-def get_named_urls():
+from django.core.urlresolvers import RegexURLPattern,RegexURLResolver
+from django.utils.regex_helper import normalize
+
+def get_named_urls(include_admin=False):
+    def _get_named_urls(resolver, ns="",pattern="",parts=None):
+        if resolver.namespace:
+            if not include_admin \
+                    and ns=="" \
+                    and resolver.namespace=='admin':return []
+            if not ns=='':
+                ns += "__"
+            ns += resolver.namespace
+
+        if not parts:
+            parts = []
+
+        norml = normalize(resolver.regex.pattern)
+        if len(norml)>1: raise Exception('jsurls currently can only deal with a single path')
+        norml = norml[0]
+
+        _pattern,_parts = norml
+        pattern += _pattern 
+
+        parts.extend(_parts)
+
+        rslts=[]    
+        for r in resolver.url_patterns:
+            if r.__class__==RegexURLResolver:
+                rslts.extend(_get_named_urls(r,ns=ns,pattern=pattern,parts=parts))
+
+        for p in resolver.url_patterns:
+            if p.__class__==RegexURLPattern and p.name and p.name!="":
+                name = ns and ns or ""
+                if not name=="":
+                    name += '__'
+                name += p.name
+
+                norml = normalize(p.regex.pattern)
+                if len(norml)>1: raise Exception('jsurls currently can only deal with a single path')
+                norml = norml[0]
+
+                _pattern,_parts = norml
+
+                _pat = pattern + _pattern 
+
+                _par = []
+                _par.extend(parts)
+                _par.extend(_parts)
+
+                rslts.append(JSUrl(name,_pat,_par))
+
+        return rslts
+
+
     resolver = get_resolver(settings.ROOT_URLCONF)
-    rev_d = resolver._get_reverse_dict()
-    return [JSUrl(k,*v[0][0]) for k,v in rev_d.items() if k.__class__==str]
+
+    return _get_named_urls(resolver)
+
+

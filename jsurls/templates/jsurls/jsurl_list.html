@@ -4,7 +4,7 @@ var jsurls = {};
 
 {% for url in named_urls %}
 
-jsurls.{{ url.key }}_template= _.template("/{{ url.url_template }}");
+jsurls.{{ url.key }}_template= _.template("{{ url.url_template }}");
 jsurls.{{ url.key }}_path = function({{ url.var_template }}){
     var var_d = { {% for v in url.var_li %}
         {{ v }}:{{ v }}{% if not forloop.last %},{% endif %}{% endfor %}
