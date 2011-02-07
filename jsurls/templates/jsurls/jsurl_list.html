@@ -1,6 +1,21 @@
 // assumes jQuery.js and underscore.js
 
-var jsurls = {};
+var jsurls = {
+    path_d:{},
+    get_named_path:function(){
+        var path = _.first(arguments);
+        var args = _.rest(arguments);
+        if(jsurls.path_d[path]) return jsurls.path_d[path].apply(this,args);
+        return false;
+    },
+    reverse:function(){
+        return this.get_named_path.apply(this,arguments);
+    },
+    url:function(){
+        return this.get_named_path.apply(this,arguments);
+    }
+
+};
 
 {% for url in named_urls %}
 
@@ -12,4 +27,7 @@ jsurls.{{ url.key }}_path = function({{ url.var_template }}){
 
     return jsurls.{{ url.key }}_template(var_d);
 }
+jsurls.path_d['{{ url.path_key }}'] = jsurls.{{ url.key }}_path;
+
 {% endfor %}
+

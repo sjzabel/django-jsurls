@@ -8,6 +8,7 @@ class JSUrl(object):
         there are a lot of variations of the same data that I use to build the js
         '''
         key = key.replace('-','_')
+        self.path_key = key.replace('__',":")
         self.key = key 
         self.var_li = var_li
         self.url_s = url_s
