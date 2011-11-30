@@ -20,6 +20,12 @@ class JSUrl(object):
         d =  dict([(var,template.format(var)) for var in self.var_li])
         return s % d
 
+    def __cmp__(self,other):
+        return cmp(self.path_key,other.path_key)
+
+    def __repr__(self):
+        return self.path_key
+
 from django.core.urlresolvers import RegexURLPattern,RegexURLResolver
 from django.utils.regex_helper import normalize
 
@@ -75,7 +81,8 @@ def get_named_urls(include_admin=False):
 
 
     resolver = get_resolver(settings.ROOT_URLCONF)
+    rslt = sorted(_get_named_urls(resolver))
 
-    return _get_named_urls(resolver)
+    return rslt 
 
 
