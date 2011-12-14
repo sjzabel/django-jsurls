@@ -19,10 +19,8 @@ setup(
     description = "jsurls is an app for exposing a sites urls in javascript",
     author = 'Stephen J. Zabel',
     author_email = 'sjzabel@gmail.com',
-    packages = find_packages(),
-    namespace_packages = ['jsurls'],
-    include_package_data = True,
-    zip_safe = False,
+    #packages = ['jsurls'],
+    packages = find_packages('.'),
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
