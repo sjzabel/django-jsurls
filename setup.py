@@ -23,7 +23,7 @@ setup(
     package_data = {'jsurls' :[
         'templates/jsurls/*.html',
         ]
-    }
+    },
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
