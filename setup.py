@@ -19,8 +19,11 @@ setup(
     description = "jsurls is an app for exposing a sites urls in javascript",
     author = 'Stephen J. Zabel',
     author_email = 'sjzabel@gmail.com',
-    #packages = ['jsurls'],
     packages = find_packages('.'),
+    package_data = {'jsurls' :[
+        'templates/jsurls/*.html',
+        ]
+    }
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
